@@ -1,4 +1,4 @@
-// shield package provides a net/http compatible middleware which blocks or allows request based on a predicate.
+// Package shield provides a net/http compatible middleware which blocks or allows request based on a predicate.
 //
 // Usage:
 //	package main
