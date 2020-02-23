@@ -1,6 +1,6 @@
 ![Build Status](https://github.com/psampaz/shield/workflows/build/badge.svg)
 [![codecov](https://codecov.io/gh/psampaz/shield/branch/master/graph/badge.svg)](https://codecov.io/gh/psampaz/shield)
-[![GoDoc](https://godoc.org/github.com/psampaz/shield?status.svg)](https://godoc.org/github.com/psampaz/shield)
+[![GoDoc](https://godoc.org/github.com/psampaz/shield?status.svg)](https://pkg.go.dev/github.com/psampaz/shield)
 [![Go Report Card](https://goreportcard.com/badge/github.com/psampaz/shield)](https://goreportcard.com/report/github.com/psampaz/shield)
 
 # Shield
