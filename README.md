@@ -6,13 +6,11 @@
 # Shield
 
 Shield is a net/http compatible middleware which blocks or allows request based on a predicate.
-Shield gives back with a user defined response when the request is blocked.
+Shield replies back with a user defined response when the request is blocked.
 
 # Usage
 
-Below you can find a example of how to configure the Shield middleware
-in order to allow only requests with GET method, and reply back with 405 Method Not Allowed 
-in any other case.
+Below you can find a example of how to configure the Shield middleware in order to allow only requests with GET method, and reply back with 405 Method Not Allowed in any other case.
 
 ```go
 package main
@@ -64,8 +62,7 @@ Content-Length: 11
 Bad Request
 ```
 
-Passing a func as Block option, gives you access only in the current request. If there is a need to 
-to use non request related data and functionality, you can you a stuct method with the same signature.
+Passing a func as Block option, gives you access only in the current request. If there is a need to to use non request related data and functionality, you can you a stuct method with the same signature.
 
 ```go
 package main
