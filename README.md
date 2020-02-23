@@ -163,3 +163,37 @@ func(r *http.Request) bool {
     return true
 }
 ```
+
+# Integration with popular routers
+
+## Chi
+```go
+package main
+
+import (
+	"net/http"
+
+	"github.com/psampaz/shield"
+
+	"github.com/go-chi/chi"
+)
+
+func main() {
+	shieldMiddleware := shield.New(shield.Options{
+		Block: func(r *http.Request) bool {
+			return true
+		},
+		Code:    http.StatusMethodNotAllowed,
+		Headers: http.Header{"Content-Type": {"text/plain"}},
+		Body:    []byte(http.StatusText(http.StatusMethodNotAllowed)),
+	})
+
+	r := chi.NewRouter()
+	r.Use(shieldMiddleware.Handler)
+	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("hello world"))
+	})
+
+	http.ListenAndServe(":8080", r)
+}
+```
