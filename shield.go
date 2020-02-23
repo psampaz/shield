@@ -1,3 +1,31 @@
+// Package shield provides a net/http compatible middleware which blocks or allows request based on a predicate.
+//
+// Usage:
+//	package main
+//
+//	import (
+//		"net/http"
+//
+//		"github.com/psampaz/shield"
+//	)
+//
+//	func main() {
+//
+//		shieldMiddleware := shield.New(shield.Options{
+//			Block: func(r *http.Request) bool {
+//				return r.Method != "GET"
+//			},
+//			Code:    http.StatusMethodNotAllowed,
+//			Headers: http.Header{"Content-Type": {"text/plain"}},
+//			Body:    []byte(http.StatusText(http.StatusMethodNotAllowed)),
+//		})
+//
+//		helloWorldHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+//			w.Write([]byte("hello world"))
+//		})
+//
+//		http.ListenAndServe(":8080", shieldMiddleware.Handler(helloWorldHandler))
+//	}
 package shield
 
 import "net/http"
@@ -15,7 +43,7 @@ type Options struct {
 	Body []byte
 }
 
-// Shield TODO
+// Shield is an net/http compatible middleware
 type Shield struct {
 	options Options
 }
