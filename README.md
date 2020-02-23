@@ -1,3 +1,6 @@
+![Build Status](https://github.com/psampaz/shield/workflows/build/badge.svg)
+[![GoDoc](https://godoc.org/github.com/psampaz/shield?status.svg)](https://pkg.go.dev/github.com/psampaz/shield)
+
 # Shield
 
 Shield is a net/http compatible middleware which blocks or allows request based on a predicate.
