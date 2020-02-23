@@ -232,3 +232,35 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("hello world"))
 }
 ```
+## Echo
+```go
+package main
+
+import (
+	"net/http"
+
+	"github.com/psampaz/shield"
+
+	"github.com/labstack/echo"
+)
+
+func main() {
+	shieldMiddleware := shield.New(shield.Options{
+		Block: func(r *http.Request) bool {
+			return true
+		},
+		Code:    http.StatusMethodNotAllowed,
+		Headers: http.Header{"Content-Type": {"text/plain"}},
+		Body:    []byte(http.StatusText(http.StatusMethodNotAllowed)),
+	})
+
+	e := echo.New()
+	e.Use(echo.WrapMiddleware(shieldMiddleware.Handler))
+
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello world")
+	})
+
+	e.Start((":8080"))
+}
+```
