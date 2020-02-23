@@ -166,6 +166,39 @@ func(r *http.Request) bool {
 
 # Integration with popular routers
 
+## Gorilla Mux
+```go
+package main
+
+import (
+	"net/http"
+
+	"github.com/psampaz/shield"
+
+	"github.com/gorilla/mux"
+)
+
+func main() {
+	shieldMiddleware := shield.New(shield.Options{
+		Block: func(r *http.Request) bool {
+			return true
+		},
+		Code:    http.StatusMethodNotAllowed,
+		Headers: http.Header{"Content-Type": {"text/plain"}},
+		Body:    []byte(http.StatusText(http.StatusMethodNotAllowed)),
+	})
+
+	r := mux.NewRouter()
+	r.Use(shieldMiddleware.Handler)
+	r.HandleFunc("/", HelloHandler)
+
+	http.ListenAndServe(":8080", r)
+}
+
+func HelloHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("hello world"))
+}
+```
 ## Chi
 ```go
 package main
@@ -190,10 +223,12 @@ func main() {
 
 	r := chi.NewRouter()
 	r.Use(shieldMiddleware.Handler)
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hello world"))
-	})
+	r.Get("/", HelloHandler)
 
 	http.ListenAndServe(":8080", r)
+}
+
+func HelloHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("hello world"))
 }
 ```
