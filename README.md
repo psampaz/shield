@@ -167,6 +167,7 @@ func(r *http.Request) bool {
 # Integration with popular routers
 
 ## Gorilla Mux
+
 ```go
 package main
 
@@ -199,7 +200,9 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("hello world"))
 }
 ```
+
 ## Chi
+
 ```go
 package main
 
@@ -232,7 +235,9 @@ func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("hello world"))
 }
 ```
+
 ## Echo
+
 ```go
 package main
 
