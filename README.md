@@ -115,52 +115,45 @@ type Options struct {
 	Body []byte
 }
 ```
+## List of predefined block methods
 
-## Examples of block functions
+### Block based on a list of query param regexes
 
-### Block requests based on a HTTP header
 ```go
-func(r *http.Request) bool {
-    if r.Header.Get("X-Custom") != "" {
-        return false
-    }   
-
-	return true
-}
-```
-### Block requests based on HTTP method
-```go
-func(r *http.Request) bool {
-    if r.Method == "GET" {
-        return false
-    }   
-
-	return true
-}
-```
-### Block requests based on HTTP scheme
-```go
-func(r *http.Request) bool {
-    if r.URL.Sheme == "https" {
-        return false
-    }   
-
-	return true
-}
-```
-### Block requests based on query parameters
-matched, err := regexp.MatchString(v, r.URL.Query().Get(k))
-```go
-func(r *http.Request) bool {
-    // allow only request that have a query param named page which is a number
-    matched, _ := regexp.MatchString(`\d+`, r.URL.Query().Get("page"))
-    if matched {
-        return false
-    }
-    return true
-}
+	queryBlock := block.NewQuery(map[string]string{
+            "page": `\d+`,
+    })
+	shieldMiddleware := shield.New(shield.Options{
+		Block:   queryBlock.Block,
+		Code:    http.StatusBadRequest,
+		Headers: http.Header{"Content-Type": {"text/plain"}},
+		Body:    []byte(http.StatusText(http.StatusBadRequest)),
+	})
 ```
 
+### Block based on a list of HTTP Method
+
+```go
+	methodBlock := block.NewMethod([]string{http.MethodGet, http.MethodPost})
+	shieldMiddleware := shield.New(shield.Options{
+		Block:   methodBlock.Block,
+		Code:    http.StatusBadRequest,
+		Headers: http.Header{"Content-Type": {"text/plain"}},
+		Body:    []byte(http.StatusText(http.StatusBadRequest)),
+	})
+```
+
+### Block based on a list of HTTP Scheme
+
+```go
+	schemeBlock := block.NewScheme([]string{"https"})
+	shieldMiddleware := shield.New(shield.Options{
+		Block:   schemeBlock.Block,
+		Code:    http.StatusBadRequest,
+		Headers: http.Header{"Content-Type": {"text/plain"}},
+		Body:    []byte(http.StatusText(http.StatusBadRequest)),
+	})
+```
 # Integration with popular routers
 
 ## Gorilla Mux
