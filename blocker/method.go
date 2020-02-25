@@ -1,7 +1,10 @@
 // Package blocker provide a list of predefined predicate methods
 package blocker
 
-import "net/http"
+import (
+	"net/http"
+	"strings"
+)
 
 // Method provides functionality to block a request based on a list of allowed HTTP methods.
 // Empty allowMethods will block
@@ -18,7 +21,7 @@ func NewMethod(allowMethods []string) *Method {
 func (m *Method) Block(r *http.Request) bool {
 	block := true
 	for _, v := range m.allowMethods {
-		if r.Method == v {
+		if r.Method == strings.ToUpper(v) {
 			block = false
 			break
 		}

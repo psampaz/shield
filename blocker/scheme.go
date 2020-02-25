@@ -1,6 +1,9 @@
 package blocker
 
-import "net/http"
+import (
+	"net/http"
+	"strings"
+)
 
 // Scheme provides functionality to block a request based on a list of allowed HTTP schemes (http/https).
 // Empty allowSchemes will block
@@ -17,7 +20,7 @@ func NewScheme(allowSchemes []string) *Scheme {
 func (s *Scheme) Block(r *http.Request) bool {
 	block := true
 	for _, v := range s.allowSchemes {
-		if r.URL.Scheme == v {
+		if r.URL.Scheme == strings.ToLower(v) {
 			block = false
 			break
 		}
