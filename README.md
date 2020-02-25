@@ -5,7 +5,7 @@
 
 # Shield
 
-Shield is a net/http compatible middleware which blocks or allows request based on a predicate.
+Shield is a net/http compatible middleware which blocks or allows requests based on a predicate.
 Shield replies back with a user defined response when the request is blocked.
 
 # Usage
