@@ -120,7 +120,7 @@ type Options struct {
 ### Block based on a list of query param regexes
 
 ```go
-	queryBlock := block.NewQuery(map[string]string{
+	queryBlock := blocker.NewQuery(map[string]string{
 		"op":    "search",
 		"page":  `\d+`,
 		"limit": `\d+`,
@@ -136,7 +136,7 @@ type Options struct {
 ### Block based on a list of HTTP Method
 
 ```go
-	methodBlock := block.NewMethod([]string{http.MethodGet, http.MethodPost})
+	methodBlock := blocker.NewMethod([]string{http.MethodGet, http.MethodPost})
 	shieldMiddleware := shield.New(shield.Options{
 		Block:   methodBlock.Block,
 		Code:    http.StatusBadRequest,
@@ -148,7 +148,7 @@ type Options struct {
 ### Block based on a list of HTTP Scheme
 
 ```go
-	schemeBlock := block.NewScheme([]string{"https"})
+	schemeBlock := blocker.NewScheme([]string{"https"})
 	shieldMiddleware := shield.New(shield.Options{
 		Block:   schemeBlock.Block,
 		Code:    http.StatusBadRequest,
