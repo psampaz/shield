@@ -58,19 +58,19 @@ func TestQuery(t *testing.T) {
 			shouldBlock: true,
 		},
 		{
-			name:        "optional query param regex  - query param does not exist",
+			name:        "optional query param regex - query param does not exist",
 			qparams:     map[string]string{"q": `^$|\d`},
 			url:         "http://localhost/foo",
 			shouldBlock: false,
 		},
 		{
-			name:        "optional query param regex  - query param exists but empty",
+			name:        "optional query param regex - query param exists but empty",
 			qparams:     map[string]string{"q": `^$|\d`},
 			url:         "http://localhost/foo?q=",
 			shouldBlock: false,
 		},
 		{
-			name:        "optional query param regex  - query param exists",
+			name:        "optional query param regex - query param exists",
 			qparams:     map[string]string{"q": `^$|\d`},
 			url:         "http://localhost/foo?q=1",
 			shouldBlock: false,
