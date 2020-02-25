@@ -16,13 +16,13 @@ func TestMethod(t *testing.T) {
 		shouldBlock   bool
 	}{
 		{
-			name:          "no methods to match",
+			name:          "no methods to match - nil",
 			allowMethods:  nil,
 			requestMethod: http.MethodGet,
 			shouldBlock:   true,
 		},
 		{
-			name:          "no methods to match",
+			name:          "no methods to match - empty",
 			allowMethods:  []string{},
 			requestMethod: http.MethodGet,
 			shouldBlock:   true,

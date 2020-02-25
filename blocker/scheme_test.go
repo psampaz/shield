@@ -16,13 +16,13 @@ func TestScheme(t *testing.T) {
 		shouldBlock   bool
 	}{
 		{
-			name:          "no allowed schemes",
+			name:          "no allowed schemes - nil",
 			allowSchemes:  nil,
 			requestScheme: "http",
 			shouldBlock:   true,
 		},
 		{
-			name:          "no allowed schemes",
+			name:          "no allowed schemes - empty",
 			allowSchemes:  []string{},
 			requestScheme: "http",
 			shouldBlock:   true,
