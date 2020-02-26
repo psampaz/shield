@@ -5,7 +5,7 @@ jobs:
   tests:
     strategy:
       matrix:
-        go-version: [1.13.x]
+        go-version: [1.13.x, 1.14.x]
         platform: [ubuntu-latest, macos-latest]
     name: tests
     runs-on: ${{ matrix.platform }}
@@ -22,7 +22,7 @@ jobs:
   lint:
     strategy:
       matrix:
-        go-version: [1.13.x]
+        go-version: [1.14.x]
         platform: [ubuntu-latest]
     name: lint
     runs-on: ${{ matrix.platform }}
@@ -41,7 +41,7 @@ jobs:
   coverage:
     strategy:
       matrix:
-        go-version: [1.13.x]
+        go-version: [1.14.x]
         platform: [ubuntu-latest]
     name: coverage
     runs-on: ${{ matrix.platform }}
