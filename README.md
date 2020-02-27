@@ -121,9 +121,10 @@ type Options struct {
 
 ```go
 	queryBlock := blocker.NewQuery(map[string]string{
-		"op":    "search",
-		"page":  `\d+`,
-		"limit": `\d+`,
+		"op":       "search",
+		"page":     `\d+`,
+		"v":        `[a-zA-Z]+`,
+		"optional": `^$|\d`,
 	})
 	shieldMiddleware := shield.New(shield.Options{
 		Block:   queryBlock.Block,
